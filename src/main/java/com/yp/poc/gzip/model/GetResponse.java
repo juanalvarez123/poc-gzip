@@ -1,14 +1,9 @@
 package com.yp.poc.gzip.model;
 
+import lombok.Setter;
+
+@Setter
 public class GetResponse {
 
-    private String greeting;
-
-    public String getGreeting() {
-        return greeting;
-    }
-
-    public void setGreeting(String greeting) {
-        this.greeting = greeting;
-    }
+    private String message;
 }
