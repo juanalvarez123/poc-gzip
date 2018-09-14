@@ -1,8 +1,8 @@
 package com.yp.poc.gzip.model;
 
-import lombok.Setter;
+import lombok.Data;
 
-@Setter
+@Data
 public class PostResponse {
 
     private String greeting;
