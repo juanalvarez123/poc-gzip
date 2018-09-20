@@ -1,15 +1,8 @@
 package com.yp.poc.gzip;
 
-import io.undertow.server.handlers.encoding.RequestEncodingHandler;
-import io.undertow.servlet.UndertowServletLogger;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.context.embedded.undertow.UndertowBuilderCustomizer;
-import org.springframework.boot.context.embedded.undertow.UndertowEmbeddedServletContainerFactory;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import io.undertow.Undertow.Builder;
 
 @SpringBootApplication
 @Configuration
