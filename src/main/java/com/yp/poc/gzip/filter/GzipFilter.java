@@ -23,21 +23,9 @@ public class GzipFilter extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
         FilterChain filterChain) throws ServletException, IOException {
 
-        /*boolean isGzipped = request.getHeader(HttpHeaders.CONTENT_ENCODING) != null && request.getHeader(HttpHeaders.CONTENT_ENCODING).contains("gzip");
-
-        if (isGzipped) {
-            throw new IllegalStateException(request.getMethod()
-                + " is not supports gzipped body of parameters."
-                + " Only POST requests are currently supported.");
-        }
-
-        if (isGzipped) {
-            request = new GzippedInputStreamWrapper((HttpServletRequest) request);
-        }*/
-
         HttpServletRequest httpServletRequest = request;
 
-        String contentEncoding = httpServletRequest.getHeader("Content-Encoding");
+        /*String contentEncoding = httpServletRequest.getHeader("Content-Encoding");
         if (contentEncoding != null && contentEncoding.indexOf("gzip") > -1)
         {
             try
@@ -60,12 +48,12 @@ public class GzipFilter extends OncePerRequestFilter {
                     }
                 };
             }
-            catch (IOException e)
+            catch (Exception e)
             {
                 String hola = "";
                 String hola2 = hola + "123";
             }
-        }
+        }*/
 
         filterChain.doFilter(request, response);
     }
@@ -77,7 +65,6 @@ public class GzipFilter extends OncePerRequestFilter {
         public DecompressServletInputStream(InputStream input)
         {
             inputStream = input;
-
         }
 
         @Override
@@ -88,7 +75,11 @@ public class GzipFilter extends OncePerRequestFilter {
 
         @Override
         public boolean isFinished() {
-            return true;
+            try {
+                return inputStream.available() == 0;
+            } catch (Exception ex) {
+                return true;
+            }
         }
 
         @Override
@@ -97,7 +88,9 @@ public class GzipFilter extends OncePerRequestFilter {
         }
 
         @Override
-        public void setReadListener(ReadListener readListener) {}
+        public void setReadListener(ReadListener readListener) {
+            throw new RuntimeException("Not implemented");
+        }
 
     }
 
