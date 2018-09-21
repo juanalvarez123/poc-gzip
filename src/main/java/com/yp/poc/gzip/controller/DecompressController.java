@@ -30,7 +30,7 @@ public class DecompressController {
         decompressService.decompressAndStoreImage(postImageRequest.getBase64ImageCompressed());
     }
 
-    @GetMapping(value = "/decompress", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
+    @GetMapping(value = "/decompress", produces = MediaType.IMAGE_JPEG_VALUE)
     public byte[] getDecompressedImage() {
         return decompressService.getDecompressedImage();
     }

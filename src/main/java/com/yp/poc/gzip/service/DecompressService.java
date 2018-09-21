@@ -2,6 +2,7 @@ package com.yp.poc.gzip.service;
 
 import com.yp.poc.gzip.util.GzipUtils;
 import java.io.IOException;
+import java.util.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,8 +17,9 @@ public class DecompressService {
     }
 
     public void decompressAndStoreImage(String base64ImageCompressed) throws IOException {
-        byte[] decompressedImage = GzipUtils.decompressImage(base64ImageCompressed);
-        imageService.setBase64DecompressedImage(decompressedImage);
+        byte[] compressedByteArray = Base64.getDecoder().decode(base64ImageCompressed);
+        byte[] decompressedByteArray = GzipUtils.decompress(compressedByteArray);
+        imageService.setBase64DecompressedImage(decompressedByteArray);
     }
 
     public byte[] getDecompressedImage() {
