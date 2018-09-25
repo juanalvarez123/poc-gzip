@@ -25,14 +25,30 @@ public class DecompressController {
         this.decompressService = decompressService;
     }
 
-    @PostMapping(value = "/decompress", consumes = MediaType.APPLICATION_JSON_VALUE)
-    public void decompressAndStoreImage(@RequestBody PostImageRequest postImageRequest) throws IOException {
+    /** Compressed image */
+
+    @PostMapping(value = "/decompress-1", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Boolean decompressAndStoreImage1(@RequestBody PostImageRequest postImageRequest) throws IOException {
         decompressService.decompressAndStoreImage(postImageRequest.getBase64ImageCompressed());
+        return true;
     }
 
-    @GetMapping(value = "/decompress", produces = MediaType.IMAGE_JPEG_VALUE)
-    public byte[] getDecompressedImage() {
+    @GetMapping(value = "/decompress-1", produces = MediaType.IMAGE_JPEG_VALUE)
+    public byte[] getDecompressedImage1() {
         return decompressService.getDecompressedImage();
+    }
+
+    /** Normal image */
+
+    @PostMapping(value = "/decompress-2", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public Boolean storeNormalImage(@RequestBody PostImageRequest postImageRequest) throws IOException {
+        decompressService.storeNormalImage(postImageRequest.getBase64ImageCompressed());
+        return true;
+    }
+
+    @GetMapping(value = "/decompress-2", produces = MediaType.IMAGE_JPEG_VALUE)
+    public byte[] getNormalImage() {
+        return decompressService.getNormalImage();
     }
 
 }

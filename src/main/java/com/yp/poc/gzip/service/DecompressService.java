@@ -25,4 +25,13 @@ public class DecompressService {
     public byte[] getDecompressedImage() {
         return imageService.getBase64DecompressedImage();
     }
+
+    public void storeNormalImage(String base64NormalImage) {
+        byte[] normalByteArray = Base64.getDecoder().decode(base64NormalImage);
+        imageService.setBase64NormalImage(normalByteArray);
+    }
+
+    public byte[] getNormalImage() {
+        return imageService.getBase64NormalImage();
+    }
 }
